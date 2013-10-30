@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# Perform necessary sosreport removal steps
+# after package is uninstalled.
+#
+
+echo "sosreport has been uninstalled!"
+
+exit 0
