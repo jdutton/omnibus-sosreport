@@ -16,21 +16,15 @@
 #
 
 name "sosreport"
-maintainer "jeff.r.dutton@gmail.com"
-homepage "https://github.com/jdutton/omnibus-sosreport"
+version "c398e45ce3e22062df08c2d4f9dc1eed1ee99e1d" # master branch 10/30/2013
 
-replaces        "sosreport"
-install_path    "/opt/sosreport"
+dependency "python"
 
-build_version   "3.0-master"  # Make sure this matches the config/software/sosreport.rb
-build_iteration 1
+source :git => "https://github.com/sosreport/sosreport.git"
 
-# creates required build directories
-dependency "preparation"
+relative_path "sosreport"
 
-# sosreport dependencies/components
-dependency "version-manifest"
-dependency "sosreport"
-
-exclude "\.git*"
-exclude "bundler\/git"
+build do
+  command "#{install_dir}/embedded/bin/python setup.py install --prefix=#{install_dir}/embedded"
+  command "ln -sf #{install_dir}/embedded/sosreport #{install_dir}/bin/"
+end
