@@ -26,5 +26,5 @@ relative_path "sosreport"
 
 build do
   command "#{install_dir}/embedded/bin/python setup.py install --prefix=#{install_dir}/embedded"
-  command "ln -sf #{install_dir}/embedded/sosreport #{install_dir}/bin/"
+  command "ln -sf #{install_dir}/embedded/bin/sosreport #{install_dir}/bin/"
 end
