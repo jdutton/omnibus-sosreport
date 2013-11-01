@@ -16,7 +16,7 @@
 #
 
 name "sosreport"
-version "c398e45ce3e22062df08c2d4f9dc1eed1ee99e1d" # master branch 10/30/2013
+version "master"
 
 dependency "python"
 
