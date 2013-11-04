@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# Build Omnibus Packages on Jenkins
+#
+
+set -e
+set -x
+
+# See https://github.com/sparklemotion/nokogiri/issues/948, which is breaking
+# the vagrant plugin install of vagrant-berkshelf
+export NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+vagrant plugin install vagrant-berkshelf
+vagrant plugin install vagrant-omnibus
+
+# Clean up old state
+vagrant destroy -f
+rm -rf pkg.previous
+[ -d pkg] && mv -f pkg pkg.previous
+
+# Stop VMs after this script runs so we don't waste CPU for no reason
+function stop_vms {
+    vagrant halt -f
+}
+trap stop_vms EXIT
+
+# Build packages
+vagrant up
