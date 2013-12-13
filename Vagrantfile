@@ -60,7 +60,12 @@ Vagrant.configure("2") do |config|
         "build_user" => "vagrant",
         "build_dir" => guest_project_path,
         "install_dir" => "/opt/#{project_name}"
-      }
+      },
+
+      # rbenv 1.6.5 cookbook points to git URLs, which are blocked by firewall - 1.6.6 has fix, but not yet released
+      "rbenv"      => { "git_repository" => "https://github.com/sstephenson/rbenv.git" },
+      "ruby_build" => { "git_repository" => "https://github.com/sstephenson/ruby-build.git" },
+      "rbenv_vars" => { "git_repository" => "https://github.com/sstephenson/rbenv-vars.git" },
     }
 
     chef.run_list = [
